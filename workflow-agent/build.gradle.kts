@@ -1,5 +1,8 @@
 plugins {
     kotlin("jvm") version "2.2.10"
+
+    kotlin("plugin.serialization") version "2.2.10"
+
 }
 
 group = "org.example"
@@ -7,12 +10,13 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
 
-    implementation("com.github.koog:koog-core:0.1.0") // Check latest version
+    implementation("ai.koog:koog-agents:0.5.2")
 
     implementation("io.ktor:ktor-client-core:2.3.7")
     implementation("io.ktor:ktor-client-cio:2.3.7")

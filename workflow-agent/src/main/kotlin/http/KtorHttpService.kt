@@ -9,7 +9,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
-class KtorHttpService(private val baseUrl: String, private val token: String) : HttpService {
+class KtorHttpService(private val baseUrl: String, private val token: String) : IHttpService {
     private val client = HttpClient(CIO) {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true; prettyPrint = true })
