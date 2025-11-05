@@ -16,8 +16,10 @@ class KtorHttpService(private val baseUrl: String, private val token: String) : 
         }
     }
 
-    override suspend fun get(path: String, params: Map<String, String>): String {
-        val response = client.get("$baseUrl$path") {
+    override suspend fun get(url: String, params: Map<String, String>): String {
+        val fullUrl = if (url.startsWith("http")) url else "$baseUrl$url"
+        
+        val response = client.get(fullUrl) {
             bearerAuth(token)
             contentType(ContentType.Application.Json)
             params.forEach { (k, v) -> parameter(k, v) }
