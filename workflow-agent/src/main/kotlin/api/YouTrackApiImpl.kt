@@ -10,11 +10,11 @@ class YouTrackApiImpl(private val http: IHttpService) : IYouTrackApi {
     private val json = Json { ignoreUnknownKeys = true }
 
     override suspend fun getWorkflows(projectId: String): List<Workflow> =
-        json.decodeFromString(http.get("/api/admin/projects/$projectId/workflows"))
+        json.decodeFromString(http.get("/api/admin/workflows?\$top=-1&fields=id,title,rules(id,name,readOnly,title,description)&query=usages.project.shortName:$projectId"))
 
     override suspend fun getWorkflowRules(workflowId: String): List<WorkflowRule> =
-        json.decodeFromString(http.get("/api/admin/workflows/$workflowId/rules"))
+        json.decodeFromString(http.get("/api/admin/workflows/$workflowId/rules?\$top=-1&fields=id,name,readOnly,title,type,description,script,text,enabled,conditions,actions,when,guard"))
 
     override suspend fun getIssue(issueId: String): String =
-        http.get("/api/issues/$issueId", mapOf("fields" to "id,summary,description,customFields(name,value)"))
+        http.get("/api/issues/$issueId?fields=id,summary,project(name),description")
 }
