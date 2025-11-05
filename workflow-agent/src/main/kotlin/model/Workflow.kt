@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Workflow(
     val id: String,
-    val name: String,
+    val title: String? = null,
+    val name: String? = null,
     val rules: List<WorkflowRule> = emptyList()
 )
