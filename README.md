@@ -73,3 +73,6 @@ workflow-agent/
 
 This project uses GitHub Actions for CI. The workflow runs tests on every push and pull request.
 
+
+
+### Suggested reads [POTENTIAL IMPROVEMENTS](./IMPROVEMENTS.md) & [IMPLEMENTATION NOTES](./IMPLEMENTATION.md)
