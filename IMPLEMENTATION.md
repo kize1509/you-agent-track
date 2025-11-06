@@ -69,3 +69,46 @@ The project architecture follows SOLID principles:
 - Service Layer: YouTrackService encapsulates business logic
 - API Client: YouTrackApiImpl handles HTTP communication
 - Factory: DependencyFactory manages component initialization
+
+
+
+
+## Strategy flowchart
+
+
+                           START
+                             │
+                             ▼
+                      ┌──────────────┐
+                      │  LLM Request │
+                      │  (nodeCallLLM)│
+                      └──────────────┘
+                             │
+                ┌────────────┴────────────┐
+                │                         │
+         [Assistant Message]       [Tool Call Requested]
+                │                         │
+                ▼                         ▼
+            ┌────────┐            ┌──────────────┐
+            │ FINISH │            │ Execute Tool │
+            └────────┘            │(executeToolCall)│
+                                  └──────────────┘
+                                         │
+                                         ▼
+                                  ┌──────────────┐
+                                  │ Send Tool    │
+                                  │   Result     │
+                                  │(sendToolResult)│
+                                  └──────────────┘
+                                         │
+                        ┌────────────────┴────────────────┐
+                        │                                 │
+                 [Assistant Message]              [Tool Call Requested]
+                        │                                 │
+                        ▼                                 │
+                    ┌────────┐                           │
+                    │ FINISH │                           │
+                    └────────┘                           │
+                                                         │
+                        └────────────────────────────────┘
+                             (Loop back to Execute Tool)
